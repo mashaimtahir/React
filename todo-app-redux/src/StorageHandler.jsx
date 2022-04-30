@@ -17,7 +17,6 @@ export const counterSlice = createSlice({
             state.push({ id: state.length+1, value: 0, name: action.payload});
         },
         Deletion: (state, action) => {
-            console.log(state, action.payload);
             const newstate = state.filter( c => c.id !== action.payload );
             return newstate;
         }
