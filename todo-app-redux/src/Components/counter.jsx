@@ -19,7 +19,7 @@ const Counter = ({counter}) => {
                 Decrement
             </button>
             <button aria-label="Decrement value" onClick={() => dispatch(Deletion(counter.id))} className='btn btn-danger mx-3' >
-                Deletion
+                Delete
             </button>
         </div>
     </div>

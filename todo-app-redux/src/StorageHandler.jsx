@@ -14,14 +14,12 @@ export const counterSlice = createSlice({
             state[action.payload-1].value -= 1
         },
         Insertion: (state, action) => {
-            const counter = state;
             state.push({ id: state.length+1, value: 0, name: action.payload});
-            state = counter;
         },
         Deletion: (state, action) => {
-            const counter = state;
-            const count = counter.filter(c => c.id !== action.payload);
-            state = count;
+            console.log(state, action.payload);
+            const newstate = state.filter( c => c.id !== action.payload );
+            return newstate;
         }
     },
 })
