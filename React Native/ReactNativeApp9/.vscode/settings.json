@@ -1,0 +1,21 @@
+{
+    "editor.cursorBlinking": "smooth",
+    "editor.find.autoFindInSelection": "always",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false,
+    "editor.formatOnType": true,
+    "diffEditor.codeLens": true,
+    "editor.suggest.preview": true,
+    "editor.suggest.shareSuggestSelections": true,
+    "files.autoGuessEncoding": true,
+    "files.maxMemoryForLargeFilesMB": 4500,
+    "breadcrumbs.showConstructors": false,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.limit.enabled": false,
+    "window.autoDetectColorScheme": true,
+    "auto-close-tag.fullMode": true,
+    "auto-close-tag.insertSpaceBeforeSelfClosingTag": true,
+    "auto-close-tag.SublimeText3Mode": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": false
+}

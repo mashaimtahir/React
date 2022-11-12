@@ -1,0 +1,39 @@
+{
+  "name": "NativeApp2",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^12.0.0",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@rneui/base": "4.0.0-rc.3",
+    "@rneui/themed": "*",
+    "react": "17.0.2",
+    "react-native": "0.68.2",
+    "react-native-canvas": "^0.1.38",
+    "react-native-check-box": "*",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-paper": "^4.12.1",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-webview": "^11.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/runtime": "^7.18.0",
+    "@react-native-community/eslint-config": "^3.0.2",
+    "babel-jest": "^28.1.0",
+    "eslint": "^8.15.0",
+    "jest": "^28.1.0",
+    "metro-react-native-babel-preset": "^0.70.3",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
