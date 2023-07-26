@@ -1,5 +1,3 @@
 {
-  "git.ignoreLimitWarning": true,
-  "editor.formatOnType": true,
-  "python.analysis.typeCheckingMode": "off"
+  "git.ignoreLimitWarning": true
 }

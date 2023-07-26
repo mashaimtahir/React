@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReactNativeApp14_Foodly</string>
+    <string name="facebook_app_id">1394070491123615</string>
+    <string name="facebook_client_token">a826f8057900963f6d88ae7c775255b7</string>
 </resources>

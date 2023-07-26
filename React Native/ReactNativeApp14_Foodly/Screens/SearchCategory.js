@@ -54,7 +54,8 @@ const SearchCategory = () => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          paddingVertical: FontSize.Caption * 0.5,
+          // paddingTop: StatusBar.currentHeight,
+          paddingVertical: StatusBar.currentHeight * 0.7,
         }}>
         <Search />
         <Text style={{fontSize: FontSize.H3, paddingLeft: FontSize.Caption}}>

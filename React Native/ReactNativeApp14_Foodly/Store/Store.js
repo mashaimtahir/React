@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import ProfileReducer from '../Reducers/ProfileReducer';
+import profileReducer from '../Reducers/ProfileReducer';
+import resturantSlice from '../Reducers/ResturantReducer';
 
 export default configureStore({
   reducer: {
-    profile: ProfileReducer,
+    profile: profileReducer,
+    resturant: resturantSlice,
   },
 });

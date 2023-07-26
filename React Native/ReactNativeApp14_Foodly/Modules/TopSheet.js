@@ -1,19 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {
   View,
   Text,
   Animated,
   Easing,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 import {Colors} from '../Theme';
 import CloseIcon from './../Svg/Close';
 import Button from '../Abstracts/Button';
 
-const TopSheet = ({check, setCheck, wrapper}) => {
+const TopSheet = ({check, setCheck, children}) => {
   const ref = useRef(new Animated.Value(0)).current;
   const Open = () => {
     Animated.timing(ref, {
@@ -34,7 +35,6 @@ const TopSheet = ({check, setCheck, wrapper}) => {
   };
 
   useEffect(() => {
-    console.log(check);
     if (check) {
       Open();
     } else {
@@ -46,6 +46,7 @@ const TopSheet = ({check, setCheck, wrapper}) => {
     <Animated.View
       style={{
         position: 'absolute',
+        zIndex: 1000,
         width: Dimensions.get('window').width,
         height: check
           ? Dimensions.get('window').height
@@ -74,7 +75,7 @@ const TopSheet = ({check, setCheck, wrapper}) => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               paddingHorizontal: '5%',
-              paddingVertical: '2%',
+              paddingVertical: StatusBar.currentHeight,
             }}>
             {/* <TouchableWithoutFeedback onPress={() => setCheck(false)}>
               <CloseIcon />
@@ -89,7 +90,7 @@ const TopSheet = ({check, setCheck, wrapper}) => {
             <Text>Clear All</Text>
           </View>
           {/* <MultiSelectionList options={['$', '$$', '$$$', '$$$$']} /> */}
-          {wrapper}
+          {children}
           <Button
             text={'Complete'}
             style={{borderTopWidth: 1, borderTopColor: Colors.black + '33'}}

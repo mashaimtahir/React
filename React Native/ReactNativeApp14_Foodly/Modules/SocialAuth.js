@@ -2,14 +2,15 @@
 import React from 'react';
 import {Dimensions, View} from 'react-native';
 import ValidText from '../Abstracts/ValidText';
+import Button from './../Abstracts/Button';
 import Scale from '../Function/Scale';
 import {Colors, FontSize} from '../Theme';
-import Button from './../Abstracts/Button';
 import Facebook from './../Svg/Facebook';
 import Google from './../Svg/Google';
+import {GoogleSignIn, FacebookSignIn} from '../Credentials/SignIn';
 
 const IconSize = Scale(375, 28, 28);
-const SocialAuth = ({description, label = 'Or'}) => {
+const SocialAuth = ({description, label = 'Or', navigation}) => {
   return (
     <View>
       <ValidText
@@ -40,6 +41,9 @@ const SocialAuth = ({description, label = 'Or'}) => {
         color={Colors.white}
         width={'100%'}
         paddingVertical={FontSize.Caption}
+        onPress={() => {
+          FacebookSignIn(navigation);
+        }}
       />
       <Button
         text={'CONNECT WITH GOOGLE'}
@@ -51,6 +55,11 @@ const SocialAuth = ({description, label = 'Or'}) => {
         width={'100%'}
         paddingVertical={FontSize.Caption}
         style={{paddingVertical: Dimensions.get('window').width * 0.02}}
+        onPress={() => {
+          GoogleSignIn(navigation);
+          // console.log(navigation);
+          // navigation;
+        }}
       />
     </View>
   );

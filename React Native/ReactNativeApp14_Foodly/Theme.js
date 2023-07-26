@@ -14,11 +14,11 @@ export const Colors = {
 
 export const FontSize = {
   H1: Dimensions.get('screen').width * 0.067, // 34 // verified
-  H2: Dimensions.get('screen').width * 0.028, // 28
+  H2: Dimensions.get('screen').width * 0.059, // 28
   H3: Dimensions.get('screen').width * 0.054, // 24
-  Headline: Dimensions.get('screen').width * 0.054, // 30
+  Headline: Dimensions.get('screen').width * 0.056, // 30
   Subhead: Dimensions.get('screen').width * 0.047, // 20 // Verified
   Body: Dimensions.get('screen').width * 0.04, // 16 // verified
   Caption: Dimensions.get('screen').width * 0.033, // 12 // verified
-  Button: Dimensions.get('screen').width * 0.034, // 14
+  Button: Dimensions.get('screen').width * 0.036, // 14
 };

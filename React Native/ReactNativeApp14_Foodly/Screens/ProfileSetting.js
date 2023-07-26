@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeName, changeEmail, changePhone} from '../Reducers/ProfileReducer';
-import {personalSlice} from '../Reducers/ProfileReducer';
 import Container from '../Abstracts/Container';
 import Button from '../Abstracts/Button';
 import StatusBar from '../Modules/StatusBar';
@@ -55,12 +54,9 @@ const ProfileSetting = ({navigation}) => {
           paddingVertical={FontSize.Caption}
           width={'100%'}
           onPress={() => {
-            console.log(typeof changeName);
-            console.log(typeof personalSlice);
-            console.log(personalSlice);
-            dispatch(changeName(''));
-            // dispatch(changeEmail(email));
-            // dispatch(changePhone(phone));
+            dispatch(changeName(name));
+            dispatch(changeEmail(email));
+            dispatch(changePhone(phone));
           }}
         />
       </View>

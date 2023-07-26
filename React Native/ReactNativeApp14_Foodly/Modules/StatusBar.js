@@ -1,6 +1,13 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
-import {FontSize} from '../Theme';
+import {
+  View,
+  StyleSheet,
+  StatusBar as Statusbar,
+  Text,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import {Colors, FontSize} from '../Theme';
 
 const StatusBar = ({
   leading,
@@ -9,16 +16,27 @@ const StatusBar = ({
   tailingClick,
   text,
   textStyle,
+  style,
 }) => {
   return (
-    <View style={[styles.row, styles.container, styles.justify]}>
+    <View style={[styles.row, styles.container, styles.justify, style]}>
+      <Statusbar
+        translucent
+        backgroundColor={'transparent'}
+        barStyle={'dark-content'}
+      />
       <TouchableWithoutFeedback
         style={[styles.absolute]}
         onPress={leadingClick}>
         <View style={styles.spacing}>{leading}</View>
       </TouchableWithoutFeedback>
       <View style={[styles.flex]}>
-        <Text style={[styles.center, textStyle, {fontSize: FontSize.Body}]}>
+        <Text
+          style={[
+            styles.center,
+            textStyle,
+            {fontSize: FontSize.Body, color: Colors.black, fontWeight: '500'},
+          ]}>
           {text}
         </Text>
       </View>
@@ -53,6 +71,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingVertical: 8,
+    paddingTop: Statusbar.currentHeight,
   },
   justify: {
     justifyContent: 'center',

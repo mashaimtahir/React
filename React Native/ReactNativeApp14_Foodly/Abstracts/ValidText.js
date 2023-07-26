@@ -1,8 +1,14 @@
 import React from 'react';
 import {Text} from 'react-native';
 
-const ValidText = ({text, style}) => {
-  return text ? <Text style={style}>{text}</Text> : <></>;
+const ValidText = ({text, style, numberOfLines}) => {
+  return text ? (
+    <Text style={style} numberOfLines={numberOfLines}>
+      {text}
+    </Text>
+  ) : (
+    <></>
+  );
 };
 
 export default ValidText;

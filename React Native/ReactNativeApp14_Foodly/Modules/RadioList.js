@@ -5,7 +5,7 @@ import {Colors, FontSize} from '../Theme';
 
 const circleSize = Scale(375, 24, 24);
 const innerCircleSize = Scale(375, 18, 18);
-const RadioList = ({choices}) => {
+const RadioList = ({choices, fontSize}) => {
   const [currentChoice, setChoice] = useState({key: undefined});
   return (
     <View>
@@ -23,7 +23,7 @@ const RadioList = ({choices}) => {
                     ) : null}
                   </View>
                 </View>
-                <Text>{choice}</Text>
+                <Text style={{fontSize: fontSize}}>{choice}</Text>
               </View>
             </TouchableWithoutFeedback>
           );

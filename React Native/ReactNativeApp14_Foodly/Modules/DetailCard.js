@@ -17,7 +17,9 @@ const DetailCard = ({img, title, subtitle, priceRange, price, state}) => {
             <Text style={styles.caption}>{priceRange}</Text>
             <Text style={styles.caption}>{state && '\t\u25CF\t' + state}</Text>
           </View>
-          <Text style={[styles.price, styles.caption]}>{'USD' + price}</Text>
+          <Text style={[styles.price, styles.caption]}>
+            {'USD ' + (price === 'free' ? 0 : price)}
+          </Text>
         </View>
       </View>
     </View>

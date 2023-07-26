@@ -7,17 +7,17 @@ import {
 } from 'react-native';
 import Scale from '../Function/Scale';
 
-const switchsize = Scale(375, 32, 19);
+const switchsize = Scale(375, 32, 29);
 const moversize = Scale(375, 15, 15);
-const Switch = () => {
+const Switch = ({state, setState}) => {
   const switchRef = useRef(new Animated.Value(2)).current;
   const backgroundInter = switchRef.interpolate({
     inputRange: [2, switchsize.WIDTH / 2],
-    outputRange: ['rgba(180, 180, 180, 1)', 'rgba(86, 105, 255, 1)'],
+    outputRange: ['rgba(180, 180, 180, 1)', 'rgba(34, 164, 93, 0.91)'],
     extrapolate: 'clamp',
   });
 
-  const [state, setState] = useState(false);
+  // const [state, setState] = useState(false);
   const forward = () => {
     setState(true);
     Animated.parallel([
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     width: switchsize.WIDTH,
     height: switchsize.height,
     borderRadius: 20,
+    paddingVertical: switchsize.HEIGHT * 0.05,
     justifyContent: 'center',
   },
   mover: {

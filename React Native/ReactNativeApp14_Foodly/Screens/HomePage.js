@@ -1,5 +1,6 @@
 import React from 'react';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet, StatusBar} from 'react-native';
+import {useSelector} from 'react-redux';
 import Scale from '../Function/Scale';
 import CategoryCard from '../Modules/CategoryCard';
 import MainStatusBar from '../Modules/MainStatusBr';
@@ -10,125 +11,56 @@ const cardImgSize = Scale(375, 160, 220);
 const cardSize2 = Scale(375, 160, 348);
 const cardImgSize2 = Scale(375, 160, 280);
 const HomePage = ({navigation}) => {
-  const imgs = [
-    'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    'https://images.unsplash.com/photo-1589670301572-734d642c53d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmF0dXJlJTIwdmlld3xlbnwwfHwwfHw%3D&w=1000&q=80',
-    'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    'https://img.freepik.com/premium-photo/mesmerizing-view-green-landscape-with-trees-beautiful-cloudy-sky_181624-57064.jpg?w=2000',
-    'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-  ];
-  const data = [
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-    {
-      time: 25,
-      cost: 'free',
-      ratingstar: 4.5,
-      title: 'McDonalds',
-      State: 'America',
-      image:
-        'https://images.pexels.com/photos/1766828/pexels-photo-1766828.jpeg?cs=srgb&dl=pexels-baskin-creative-studios-1766828.jpg&fm=jpg',
-    },
-  ];
+  let data = useSelector(state => state.resturant);
   return (
-    <View>
+    <View style={{paddingTop: StatusBar.currentHeight}}>
+      <StatusBar translucent />
       <MainStatusBar />
       <ScrollView>
         <View style={[styles.flex, styles.row, styles.justifyevenly]}>
-          <View>
+          <View style={{paddingBottom: cardImgSize.HEIGHT * 0.2}}>
             {data.map((item, key) => {
               return (
-                key % 2 === 0 && (
+                (key % 2 === 0 || key % 11 === 0) && (
                   <CategoryCard
-                    key={key}
+                    key={item.id}
                     title={item.title}
                     time={item.time}
                     ratingstar={item.ratingstar}
-                    cost={item.cost}
+                    cost={item.deliverycost}
                     State={item.State}
-                    size={key % 2 === 0 ? cardSize : cardSize2}
-                    imgSize={key % 2 === 0 ? cardImgSize : cardImgSize2}
+                    State2={item.State2}
+                    size={
+                      key % 2 === 0 || key % 11 === 0 ? cardSize : cardSize2
+                    }
+                    imgSize={
+                      key % 2 === 0 || key % 11 === 0
+                        ? cardImgSize
+                        : cardImgSize2
+                    }
                     image={item.image}
                     overlayColor={Colors.black + '4a'}
                     borderRadius={12}
                     detailInCard
+                    onPress={() =>
+                      navigation.navigate('Restaurant', {title: item.title})
+                    }
                   />
                 )
               );
             })}
           </View>
-          <View>
+          <View style={{paddingBottom: cardImgSize2.HEIGHT * 0.2}}>
             {data.map((item, key) => {
               return (
-                key % 2 !== 0 && (
+                key % 2 !== 0 &&
+                key % 11 !== 0 && (
                   <CategoryCard
-                    key={key}
+                    key={item.id}
                     title={item.title}
                     time={item.time}
                     ratingstar={item.ratingstar}
-                    cost={item.cost}
+                    cost={item.deliverycost}
                     State={item.State}
                     size={key % 2 === 0 ? cardSize : cardSize2}
                     imgSize={key % 2 === 0 ? cardImgSize : cardImgSize2}
@@ -136,6 +68,9 @@ const HomePage = ({navigation}) => {
                     overlayColor={Colors.black + '4a'}
                     borderRadius={12}
                     detailInCard
+                    onPress={() =>
+                      navigation.navigate('Restaurant', {title: item.title})
+                    }
                   />
                 )
               );

@@ -4,7 +4,7 @@ const Save = async (name, value) => {
   try {
     await AsyncStorage.setItem(name, value);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -12,9 +12,34 @@ const Get = async name => {
   try {
     return await AsyncStorage.getItem(name);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
+
+const getAllKeys = async () => {
+  let keys = [];
+  try {
+    keys = await AsyncStorage.getAllKeys();
+    return keys;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const GetValue = name => {
+  return new Promise((resolve, reject) => {
+    let did = AsyncStorage.getItem(name);
+    console.log('did', did);
+    resolve(did);
+  });
+};
+
+GetValue()
+  .then(result => {
+    console.log(result);
+    return result;
+  })
+  .catch(error => console.error(error));
 
 // const myFunction = name => {
 //   return new Promise((resolve, reject) => {
@@ -34,4 +59,4 @@ const Get = async name => {
 //     console.log(err);
 //   });
 
-export {Save, Get};
+export {Save, Get, getAllKeys, GetValue};

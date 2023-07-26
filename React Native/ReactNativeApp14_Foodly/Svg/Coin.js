@@ -1,7 +1,7 @@
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
 
-const Backward = ({height, width, color}) => {
+const Coin = ({height, width, color}) => {
   const defaultColor = color ? color : '#868686';
   const defaultHeight = height ? height : 14;
   const defaultWidth = width ? width : 14;
@@ -15,4 +15,4 @@ const Backward = ({height, width, color}) => {
   );
 };
 
-export default Backward;
+export default Coin;

@@ -6,6 +6,7 @@ import {
   Text,
   ImageBackground,
   Dimensions,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import Pager from './Pager';
 import Star from './../Svg/Star';
@@ -37,115 +38,130 @@ const CategoryCard = ({
   overlayText,
   borderRadius,
   detailInCard,
+  onPress,
+  style,
+  icons = true,
 }) => {
   return (
-    <View style={{width: size.WIDTH, height: size.HEIGHT}}>
-      {typeof image === 'object' ? (
-        <View style={{width: imgSize.WIDTH, height: imgSize.HEIGHT}}>
-          <Pager
-            images={image}
-            containerStyle={{borderRadius: borderRadius ?? 12}}
-            max={5}
-          />
-        </View>
-      ) : image !== undefined ? (
-        <View
-          style={{
-            width: imgSize.WIDTH,
-            height: imgSize.HEIGHT,
-            overflow: 'hidden',
-            borderRadius: borderRadius ?? 12,
-          }}>
-          <ImageBackground
-            source={{uri: image}}
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={[{width: size.WIDTH, height: size.HEIGHT}, style]}>
+        {typeof image === 'object' ? (
+          <View style={{width: imgSize.WIDTH, height: imgSize.HEIGHT}}>
+            <Pager
+              images={image}
+              containerStyle={{borderRadius: borderRadius ?? 12}}
+              max={5}
+            />
+          </View>
+        ) : image !== undefined ? (
+          <View
             style={{
               width: imgSize.WIDTH,
               height: imgSize.HEIGHT,
+              overflow: 'hidden',
+              borderRadius: borderRadius ?? 12,
             }}>
-            <View
-              style={[
-                {
-                  flex: 1,
-                  backgroundColor: overlayColor,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                },
-              ]}>
-              <ValidText text={overlayText} style={styles.overlayText} />
-            </View>
-            {detailInCard ? (
+            <ImageBackground
+              source={{uri: image}}
+              style={{
+                width: imgSize.WIDTH,
+                height: imgSize.HEIGHT,
+              }}>
+              <View
+                style={[
+                  {
+                    flex: 1,
+                    backgroundColor: overlayColor,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  },
+                ]}>
+                <ValidText text={overlayText} style={styles.overlayText} />
+              </View>
+              {detailInCard ? (
+                <>
+                  <View style={styles.ImageInCard}>
+                    <View style={[styles.row, styles.centeredChild]}>
+                      <TimerClock
+                        width={timerClockSize.WIDTH}
+                        height={timerClockSize.HEIGHT}
+                      />
+                      <Text style={{color: Colors.white}}>
+                        {' ' + time + ' min'}
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.row,
+                        styles.centeredChild,
+                        {
+                          paddingVertical:
+                            Dimensions.get('window').width * 0.015,
+                        },
+                      ]}>
+                      <Coin color={Colors.white} />
+                      <Text style={{color: Colors.white}}>{' ' + cost}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.ratingBox}>
+                    <Text style={styles.ratingStar}>{ratingstar}</Text>
+                  </View>
+                </>
+              ) : null}
+            </ImageBackground>
+          </View>
+        ) : null}
+        <ValidText text={title} numberOfLines={1} style={styles.title} />
+        {!overlayText ? (
+          <Text style={styles.spacing}>
+            <ValidText text={Price} />
+            {Price && State ? (
+              <Text style={styles.textdot}>{' \t\u25cf\t'}</Text>
+            ) : null}
+            <ValidText text={State} />
+            {State && State2 ? (
+              <Text style={styles.textdot}>{' \t\u25cf\t'}</Text>
+            ) : null}
+            <ValidText text={State2} />
+            {Food && State2 ? (
+              <Text style={styles.textdot}>{'\t\u25cf\t'}</Text>
+            ) : null}
+            <ValidText text={Food} />
+          </Text>
+        ) : null}
+        {!detailInCard && !overlayText ? (
+          <Text style={styles.text}>
+            <ValidText text={ratingstar} />
+            {ratingstar !== undefined ? (
+              <View style={styles.star}>
+                <Star width={starSize.WIDTH} height={starSize.HEIGHT} />
+              </View>
+            ) : null}
+            <ValidText text={rating} />
+            {rating !== undefined ? <Text>{'+ Ratings \t\t'}</Text> : null}
+            {time !== undefined ? (
               <>
-                <View style={styles.ImageInCard}>
-                  <View style={[styles.row, styles.centeredChild]}>
-                    <TimerClock
-                      width={timerClockSize.WIDTH}
-                      height={timerClockSize.HEIGHT}
-                    />
-                    <Text style={{color: Colors.white}}>
-                      {' ' + time + 'min'}
-                    </Text>
-                  </View>
-                  <View
-                    style={[
-                      styles.row,
-                      styles.centeredChild,
-                      {paddingVertical: Dimensions.get('window').width * 0.015},
-                    ]}>
-                    <Coin color={Colors.white} />
-                    <Text style={{color: Colors.white}}>{' ' + cost}</Text>
-                  </View>
-                </View>
-                <View style={styles.ratingBox}>
-                  <Text style={styles.ratingStar}>{ratingstar}</Text>
-                </View>
+                <Clock
+                  width={clockSize.WIDTH}
+                  height={clockSize.HEIGHT}
+                  color={Colors.black + '99'}
+                />
+                <Text>{' \t' + time + ' min'}</Text>
               </>
             ) : null}
-          </ImageBackground>
-        </View>
-      ) : null}
-      <ValidText text={title} style={styles.title} />
-      <Text>
-        <ValidText text={Price} />
-        <ValidText text={State} />
-        {State && State2 ? (
-          <Text style={styles.textdot}>{' \t\u25cf\t'}</Text>
-        ) : null}
-        <ValidText text={State2} />
-        {Food && State2 ? (
-          <Text style={styles.textdot}>{'\t\u25cf\t'}</Text>
-        ) : null}
-        <ValidText text={Food} />
-      </Text>
-      {!detailInCard ? (
-        <Text style={styles.text}>
-          <ValidText text={ratingstar} />
-          {ratingstar !== undefined ? (
-            <View style={styles.star}>
-              <Star width={starSize.WIDTH} height={starSize.HEIGHT} />
-            </View>
-          ) : null}
-          <ValidText text={rating} />
-          {rating !== undefined ? <Text>{'+ Ratings \t\t'}</Text> : null}
-          {time !== undefined ? (
-            <>
-              <Clock
-                width={clockSize.WIDTH}
-                height={clockSize.HEIGHT}
-                color={Colors.black + '99'}
-              />
-              <Text>{' \t' + time + 'min'}</Text>
-            </>
-          ) : null}
-          {cost !== undefined ? (
-            <>
+            {cost !== undefined && time !== undefined ? (
               <Text style={styles.textdot}>{'\t\u25CF \t'}</Text>
-              <Coin />
-              <Text>{' \t' + cost}</Text>
-            </>
-          ) : null}
-        </Text>
-      ) : null}
-    </View>
+            ) : null}
+            {cost !== undefined ? (
+              <>
+                {icons ? <Coin /> : null}
+                <Text>{' \t' + cost}</Text>
+              </>
+            ) : null}
+          </Text>
+        ) : null}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -157,7 +173,7 @@ const styles = StyleSheet.create({
     fontSize: FontSize.Subhead,
     color: Colors.black,
     fontWeight: '600',
-    paddingTop: Dimensions.get('window').width * 0.02,
+    paddingTop: Dimensions.get('window').width * 0.03,
   },
   subtitle: {
     fontSize: FontSize.Body,
@@ -186,7 +202,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   star: {
-    paddingHorizontal: Dimensions.get('window').width * 0.01,
+    paddingHorizontal: Dimensions.get('window').width * 0.02,
   },
   centeredChild: {
     alignItems: 'center',
@@ -200,6 +216,10 @@ const styles = StyleSheet.create({
   overlayText: {
     color: Colors.white,
     fontSize: FontSize.Body,
+  },
+  spacing: {
+    paddingTop: FontSize.Caption * 0.35,
+    paddingBottom: FontSize.Caption * 0.15,
   },
 });
 

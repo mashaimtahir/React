@@ -7,6 +7,7 @@ import {
   StatusBar,
   Text,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import Button from '../Abstracts/Button';
 import Container from '../Abstracts/Container';
 import ValidText from '../Abstracts/ValidText';
@@ -18,12 +19,15 @@ import {Colors, FontSize} from '../Theme';
 const ImgSize = Scale(375, 375, 280);
 const BtnSize = Scale(375, 54, 54);
 const btnfont = FontSize.Body;
-const AddOrder = ({navigation, route, Price, State, State2, Food}) => {
+const AddOrder = ({navigation, route}) => {
   const [counter, setCounter] = useState(0);
+  const item = useSelector(
+    state => state.resturant.filter(items => items.id === route.params.id)[0],
+  );
   const params = route.params;
-  console.log(params);
   return (
     <>
+      {console.log(item)}
       <StatusBar
         translucent
         backgroundColor={'transparent'}
@@ -33,29 +37,26 @@ const AddOrder = ({navigation, route, Price, State, State2, Food}) => {
         <Image
           style={{width: ImgSize.WIDTH, height: ImgSize.HEIGHT}}
           source={{
-            uri: 'https://images.all-free-download.com/images/graphiclarge/beauty_of_nature_15_211311.jpg',
+            uri: item.image,
           }}
         />
         <Container>
-          <Text style={{fontSize: FontSize.H3}}>Cookie Sandwich</Text>
+          <Text style={{fontSize: FontSize.H3}}>{item.title}</Text>
+          <Text>{item.subtitle}</Text>
           <Text>
-            Shortbread, chocolate turtle cookies, and red velvet. 8 ounces cream
-            cheese, softened.
-          </Text>
-          <Text>
-            <ValidText text={'Price'} />
-            {(Price && State) || true ? (
+            <ValidText text={item.cost} />
+            {(item.cost && item.State) || true ? (
               <Text style={styles.textdot}>{' \t\u25cf\t'}</Text>
             ) : null}
-            <ValidText text={'State'} />
-            {(State && State2) || true ? (
+            <ValidText text={item.State} />
+            {(item.State && item.State2) || true ? (
               <Text style={styles.textdot}>{' \t\u25cf\t'}</Text>
             ) : null}
-            <ValidText text={'State2'} />
-            {(Food && State2) || true ? (
+            <ValidText text={item.State2} />
+            {(item.food && item.State2) || true ? (
               <Text style={styles.textdot}>{'\t\u25cf\t'}</Text>
             ) : null}
-            <ValidText text={'Food'} />
+            <ValidText text={item.food} />
           </Text>
           <Text
             style={{

@@ -1,5 +1,7 @@
 /*eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {changePassword} from '../Reducers/ProfileReducer';
 import Container from '../Abstracts/Container';
 import Button from '../Abstracts/Button';
 import StatusBar from '../Modules/StatusBar';
@@ -8,9 +10,10 @@ import {Colors, FontSize} from '../Theme';
 import {Text, TextInput, View} from 'react-native';
 
 const ChangePassword = ({navigation}) => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
+  const dispatch = useDispatch();
+  const [oldpass, setOldpass] = useState();
+  const [newpass, setNewpass] = useState();
+  const [newpassCinfirm, setNewpassCinfirm] = useState();
   return (
     <Container>
       <StatusBar
@@ -21,24 +24,24 @@ const ChangePassword = ({navigation}) => {
       <View style={{paddingTop: FontSize.Body}}>
         <Text>PASSWORD</Text>
         <TextInput
-          value={name}
-          onChangeText={setName}
+          value={oldpass}
+          onChangeText={setOldpass}
           style={{borderBottomWidth: 1, borderBottomColor: Colors.black + '2f'}}
         />
       </View>
       <View style={{paddingTop: FontSize.Body}}>
         <Text>NEW PASSWORD</Text>
         <TextInput
-          value={email}
-          onChangeText={setEmail}
+          value={newpass}
+          onChangeText={setNewpass}
           style={{borderBottomWidth: 1, borderBottomColor: Colors.black + '2f'}}
         />
       </View>
       <View style={{paddingTop: FontSize.Body}}>
         <Text>CINFIRM PASSWORD</Text>
         <TextInput
-          value={phone}
-          onChangeText={setPhone}
+          value={newpassCinfirm}
+          onChangeText={setNewpassCinfirm}
           style={{borderBottomWidth: 1, borderBottomColor: Colors.black + '2f'}}
         />
       </View>
@@ -50,9 +53,13 @@ const ChangePassword = ({navigation}) => {
           backgroundColor={Colors.green}
           paddingVertical={FontSize.Caption}
           width={'100%'}
-          onPress={() =>
-            alert('Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + phone)
-          }
+          onPress={() => {
+            if (newpass === newpassCinfirm) {
+              dispatch(changePassword({old: oldpass, new: newpass}));
+            } else {
+              alert('Not matched password.');
+            }
+          }}
         />
       </View>
     </Container>
